@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom"
+import axios from "axios";
 
 const ShowUser = () => {
-    const { userId } = useParams();
+    const {userId} = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,13 +11,13 @@ const ShowUser = () => {
 
     useEffect(() => {
 
-        fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-            .then(res => res.json())
-            .then(data => {
-                setUser(data);
+        axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
+            .then(user => {
+                setUser(user.data);
                 setLoading(false)
                 setError(null)
-            }).catch(err => {
+            })
+            .catch(err => {
                 setError(err.message)
                 setLoading(false)
             })

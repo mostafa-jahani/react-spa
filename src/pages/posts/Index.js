@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import ListPosts from "../../components/posts/List";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const IndexPost = () => {
     const [posts, setPosts] = useState(null);
@@ -9,16 +10,16 @@ const IndexPost = () => {
 
     useEffect(() => {
 
-        fetch("https://jsonplaceholder.typicode.com/posts")
-            .then(res => res.json())
-            .then(data => {
-                setPosts(data);
+        axios.get("https://jsonplaceholder.typicode.com/posts")
+            .then(posts => {
+                setPosts(posts.data);
                 setLoading(false)
                 setError(null)
-            }).catch(err => {
-            setError(err.message)
-            setLoading(false)
-        })
+            })
+            .catch(err => {
+                setError(err.message)
+                setLoading(false)
+            })
 
     }, []);
 

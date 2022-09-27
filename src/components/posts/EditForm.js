@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
-const EditForm = ({ post }) => {
+const EditForm = ({post}) => {
+
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [loading, setLoading] = useState(false);
@@ -11,38 +13,35 @@ const EditForm = ({ post }) => {
         e.preventDefault();
 
         setLoading(true);
-        fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
+        axios({
             method: 'PUT',
-            body: JSON.stringify({
+            url: `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+            data: {
                 title,
                 body,
                 userId: 1,
                 id: post.id
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
             },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setLoading(false)
-                setError(null)
-                Swal.fire({
-                    title: "Thanks!",
-                    text: "Post update successfully",
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                });
-            }).catch(err => {
-                setLoading(false)
-                setError(err.message)
-                Swal.fire({
-                    title: "Error!",
-                    text: err.message,
-                    icon: "warning",
-                    confirmButtonText: "Ok",
-                });
+            headers: {'Content-type': 'application/json; charset=UTF-8',}
+        }).then((data) => {
+            setLoading(false)
+            setError(null)
+            Swal.fire({
+                title: "Thanks!",
+                text: "Post update successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
             });
+        }).catch(err => {
+            setLoading(false)
+            setError(err.message)
+            Swal.fire({
+                title: "Error!",
+                text: err.message,
+                icon: "warning",
+                confirmButtonText: "Ok",
+            });
+        });
     }
 
     useEffect(() => {
@@ -54,14 +53,15 @@ const EditForm = ({ post }) => {
         <form onSubmit={(e) => handleSubmit(e)}>
             <div className="mb-3">
                 <label className="form-label">Title</label>
-                <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" className="form-control" />
+                <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" className="form-control"/>
                 <div className="form-text text-danger">
                     {title ? '' : 'Title is required'}
                 </div>
             </div>
             <div className="mb-3">
                 <label className="form-label">Body</label>
-                <textarea onChange={(e) => setBody(e.target.value)} value={body} className="form-control" rows="6"></textarea>
+                <textarea onChange={(e) => setBody(e.target.value)} value={body} className="form-control"
+                          rows="6"></textarea>
                 <div className="form-text text-danger">
                     {body ? '' : 'Title is required'}
                 </div>

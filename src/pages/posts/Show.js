@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom"
 import DeletePost from "../../components/posts/Delete";
+import axios from "axios";
 
 const ShowPost = () => {
     const {postId} = useParams();
@@ -11,16 +12,16 @@ const ShowPost = () => {
 
     useEffect(() => {
 
-        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-            .then(res => res.json())
-            .then(data => {
-                setPost(data);
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+            .then(post => {
+                setPost(post.data);
                 setLoading(false)
                 setError(null)
-            }).catch(err => {
-            setError(err.message)
-            setLoading(false)
-        })
+            })
+            .catch(err => {
+                setError(err.message)
+                setLoading(false)
+            })
 
     }, [postId]);
 
@@ -37,7 +38,7 @@ const ShowPost = () => {
                         {post.body}
                     </ul>
                     <div className="card-footer">
-                        <DeletePost postId={post.id} />
+                        <DeletePost postId={post.id}/>
                         <Link className="btn btn-sm btn-dark" to={`/posts/edit/${postId}`}>Edit</Link>
                     </div>
                 </div>
