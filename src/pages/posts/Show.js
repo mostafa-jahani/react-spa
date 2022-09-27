@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom"
+import DeletePost from "../../components/posts/Delete";
 
 const ShowPost = () => {
     const {postId} = useParams();
@@ -36,6 +37,7 @@ const ShowPost = () => {
                         {post.body}
                     </ul>
                     <div className="card-footer">
+                        <DeletePost postId={post.id} />
                         <Link className="btn btn-sm btn-dark" to={`/posts/edit/${postId}`}>Edit</Link>
                     </div>
                 </div>
