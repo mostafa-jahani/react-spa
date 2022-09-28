@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import EditFormPost from "../../components/posts/EditForm";
+import axios from "axios";
 
 const EditPost = () => {
-    const { postId } = useParams();
+    const {postId} = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,13 +12,13 @@ const EditPost = () => {
 
     useEffect(() => {
 
-        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-            .then(res => res.json())
-            .then(data => {
-                setPost(data);
+        axios.get(`/posts/${postId}`)
+            .then(post => {
+                setPost(post.data);
                 setLoading(false)
                 setError(null)
-            }).catch(err => {
+            })
+            .catch(err => {
                 setError(err.message)
                 setLoading(false)
             })
@@ -29,7 +30,7 @@ const EditPost = () => {
             <h2>Edit Post :</h2>
             {error && <div>{error}</div>}
             {loading && <div className="spinner-border"></div>}
-            {post && <EditFormPost post={post} />}
+            {post && <EditFormPost post={post}/>}
         </div>
     )
 }

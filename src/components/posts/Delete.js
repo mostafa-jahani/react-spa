@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const DeletePost = ({ postId }) => {
 
@@ -8,9 +9,7 @@ const DeletePost = ({ postId }) => {
 
     const handleDelete = () => {
         setLoading(true);
-        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
-            method: 'DELETE'
-        })
+        axios.delete(`/posts/${postId}`)
             .then((res) => {
                 setLoading(false)
                 setError(null)

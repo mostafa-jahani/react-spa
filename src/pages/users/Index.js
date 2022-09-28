@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ListUsers from "../../components/users/List";
+import axios from "axios";
 
 
 const IndexUser = () => {
@@ -9,13 +10,13 @@ const IndexUser = () => {
 
     useEffect(() => {
 
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data);
+        axios.get("/users")
+            .then(users => {
+                setUsers(users.data);
                 setLoading(false)
                 setError(null)
-            }).catch(err => {
+            })
+            .catch(err => {
                 setError(err.message)
                 setLoading(false)
             })
@@ -28,7 +29,7 @@ const IndexUser = () => {
                 <h2>Users :</h2>
                 {error && <div>{error}</div>}
                 {loading && <div className="spinner-border"></div>}
-                {users && <ListUsers users={users} />}
+                {users && <ListUsers users={users}/>}
             </div>
         </div>
     )
