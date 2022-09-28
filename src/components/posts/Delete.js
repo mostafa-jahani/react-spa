@@ -9,7 +9,7 @@ const DeletePost = ({ postId }) => {
 
     const handleDelete = () => {
         setLoading(true);
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+        axios.delete(`/posts/${postId}`)
             .then((res) => {
                 setLoading(false)
                 setError(null)

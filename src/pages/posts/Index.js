@@ -10,7 +10,7 @@ const IndexPost = () => {
 
     useEffect(() => {
 
-        axios.get("https://jsonplaceholder.typicode.com/posts")
+        axios.get("/posts")
             .then(posts => {
                 setPosts(posts.data);
                 setLoading(false)

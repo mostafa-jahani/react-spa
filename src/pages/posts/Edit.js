@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import EditFormPost from "../../components/posts/EditForm";
 import axios from "axios";
-import Swal from "sweetalert2";
 
 const EditPost = () => {
     const {postId} = useParams();
@@ -13,7 +12,7 @@ const EditPost = () => {
 
     useEffect(() => {
 
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+        axios.get(`/posts/${postId}`)
             .then(post => {
                 setPost(post.data);
                 setLoading(false)

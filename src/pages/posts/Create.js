@@ -17,7 +17,7 @@ const CreatePost = () => {
 
         axios({
             method: 'post',
-            url: 'https://jsonplaceholder.typicode.com/posts',
+            url: '/posts',
             data: {
                 title,
                 body,

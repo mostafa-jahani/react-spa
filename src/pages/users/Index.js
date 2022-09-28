@@ -10,7 +10,7 @@ const IndexUser = () => {
 
     useEffect(() => {
 
-        axios.get("https://jsonplaceholder.typicode.com/users")
+        axios.get("/users")
             .then(users => {
                 setUsers(users.data);
                 setLoading(false)

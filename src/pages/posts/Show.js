@@ -12,7 +12,7 @@ const ShowPost = () => {
 
     useEffect(() => {
 
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+        axios.get(`/posts/${postId}`)
             .then(post => {
                 setPost(post.data);
                 setLoading(false)

@@ -15,7 +15,7 @@ const EditForm = ({post}) => {
         setLoading(true);
         axios({
             method: 'PUT',
-            url: `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+            url: `/posts/${post.id}`,
             data: {
                 title,
                 body,

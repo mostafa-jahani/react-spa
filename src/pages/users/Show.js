@@ -11,7 +11,7 @@ const ShowUser = () => {
 
     useEffect(() => {
 
-        axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        axios.get(`/users/${userId}`)
             .then(user => {
                 setUser(user.data);
                 setLoading(false)
