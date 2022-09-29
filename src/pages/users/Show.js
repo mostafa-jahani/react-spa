@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
-import http from "../../services/httpService";
+import {getUserById} from "../../controller/userController";
 
 const ShowUser = () => {
     const {userId} = useParams();
@@ -11,7 +11,7 @@ const ShowUser = () => {
 
     useEffect(() => {
 
-        http.get(`/users/${userId}`)
+        getUserById(userId)
             .then(user => {
                 setUser(user.data);
                 setLoading(false)

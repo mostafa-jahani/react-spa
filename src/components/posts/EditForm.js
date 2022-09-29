@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
 import http from "../../services/httpService";
+import {updatePost} from "../../controller/postController";
 
 const EditForm = ({post}) => {
 
@@ -13,7 +14,7 @@ const EditForm = ({post}) => {
         e.preventDefault();
 
         setLoading(true);
-        http.put(`/posts/${post.id}`, {title, body, userId: 1, id: post.id})
+        updatePost(post.id, {title, body, userId: 1, id: post.id})
             .then((data) => {
                 setLoading(false)
                 setError(null)

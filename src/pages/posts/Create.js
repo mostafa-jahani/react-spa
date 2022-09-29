@@ -1,6 +1,7 @@
 import {useState} from "react"
 import Swal from "sweetalert2";
 import http from "../../services/httpService";
+import {addPost} from "../../controller/postController";
 
 const CreatePost = () => {
 
@@ -14,19 +15,7 @@ const CreatePost = () => {
         e.preventDefault();
 
         setLoading(true);
-
-        http({
-            method: 'post',
-            url: '/posts',
-            data: {
-                title,
-                body,
-                userId: 1,
-            },
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
+        addPost({title, body, userId: 1,})
             .then((data) => {
                 setLoading(false)
                 setError(null)

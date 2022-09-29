@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import ListUsers from "../../components/users/List";
-import http from "../../services/httpService";
+import {getUsers} from "../../controller/userController";
 
 
 const IndexUser = () => {
@@ -10,7 +10,7 @@ const IndexUser = () => {
 
     useEffect(() => {
 
-        http.get("/users")
+        getUsers()
             .then(users => {
                 setUsers(users.data);
                 setLoading(false)
