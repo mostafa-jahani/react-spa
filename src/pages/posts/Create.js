@@ -1,7 +1,6 @@
 import {useState} from "react"
-import Swal from "sweetalert2";
-import http from "../../services/httpService";
 import {addPost} from "../../controller/postController";
+import {sweetalertAddPost} from "../../services/seetalertService";
 
 const CreatePost = () => {
 
@@ -9,7 +8,6 @@ const CreatePost = () => {
     const [body, setBody] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,12 +17,7 @@ const CreatePost = () => {
             .then((data) => {
                 setLoading(false)
                 setError(null)
-                Swal.fire({
-                    title: "Thanks!",
-                    text: "Post created successfully",
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                });
+                sweetalertAddPost()
             })
             .catch(err => {
                 setLoading(false)
