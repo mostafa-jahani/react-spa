@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
-import axios from "axios";
+import http from "../../services/httpService";
 
 const ShowUser = () => {
     const {userId} = useParams();
@@ -11,7 +11,7 @@ const ShowUser = () => {
 
     useEffect(() => {
 
-        axios.get(`/users/${userId}`)
+        http.get(`/users/${userId}`)
             .then(user => {
                 setUser(user.data);
                 setLoading(false)

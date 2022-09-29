@@ -1,6 +1,6 @@
 import {useState} from "react"
 import Swal from "sweetalert2";
-import axios from "axios";
+import http from "../../services/httpService";
 
 const CreatePost = () => {
 
@@ -15,7 +15,7 @@ const CreatePost = () => {
 
         setLoading(true);
 
-        axios({
+        http({
             method: 'post',
             url: '/posts',
             data: {

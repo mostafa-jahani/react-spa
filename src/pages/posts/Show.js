@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom"
 import DeletePost from "../../components/posts/Delete";
-import axios from "axios";
+import http from "../../services/httpService";
 
 const ShowPost = () => {
     const {postId} = useParams();
@@ -12,7 +12,7 @@ const ShowPost = () => {
 
     useEffect(() => {
 
-        axios.get(`/posts/${postId}`)
+        http.get(`/posts/${postId}`)
             .then(post => {
                 setPost(post.data);
                 setLoading(false)

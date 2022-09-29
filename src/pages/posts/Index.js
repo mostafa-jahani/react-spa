@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import ListPosts from "../../components/posts/List";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import http from "../../services/httpService";
 
 const IndexPost = () => {
     const [posts, setPosts] = useState(null);
@@ -10,7 +10,7 @@ const IndexPost = () => {
 
     useEffect(() => {
 
-        axios.get("/posts")
+        http.get("/posts")
             .then(posts => {
                 setPosts(posts.data);
                 setLoading(false)

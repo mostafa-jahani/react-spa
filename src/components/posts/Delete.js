@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import axios from "axios";
+import http from '../../services/httpService'
+
 
 const DeletePost = ({ postId }) => {
 
@@ -9,7 +10,7 @@ const DeletePost = ({ postId }) => {
 
     const handleDelete = () => {
         setLoading(true);
-        axios.delete(`/posts/${postId}`)
+        http.delete(`/posts/${postId}`)
             .then((res) => {
                 setLoading(false)
                 setError(null)
