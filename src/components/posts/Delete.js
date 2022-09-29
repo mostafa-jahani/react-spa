@@ -1,5 +1,5 @@
 import { useState } from "react";
-import http from '../../services/httpService'
+import {deletePost} from "../../controller/postController";
 import {sweetalertDeletePost, sweetalertError} from "../../services/seetalertService";
 
 
@@ -10,7 +10,7 @@ const DeletePost = ({ postId }) => {
 
     const handleDelete = () => {
         setLoading(true);
-        http.delete(`/posts/${postId}`)
+        deletePost(postId)
             .then((res) => {
                 setLoading(false)
                 setError(null)

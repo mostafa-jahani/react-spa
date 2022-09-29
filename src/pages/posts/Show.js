@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom"
 import DeletePost from "../../components/posts/Delete";
-import http from "../../services/httpService";
 import {getPostById} from "../../controller/postController";
 
 const ShowPost = () => {

@@ -20,3 +20,7 @@ export const updatePost = (postId, data) => {
     return http.put(`/posts/${postId}`, data)
 }
 
+export const deletePost = (postId) => {
+    return http.delete(`/posts/${postId}`)
+}
+
