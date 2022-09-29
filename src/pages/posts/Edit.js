@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import EditFormPost from "../../components/posts/EditForm";
-import http from "../../services/httpService";
 import {editPost} from "../../controller/postController";
 
 const EditPost = () => {

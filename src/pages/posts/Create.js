@@ -1,6 +1,5 @@
 import {useState} from "react"
 import Swal from "sweetalert2";
-import http from "../../services/httpService";
 import {addPost} from "../../controller/postController";
 
 const CreatePost = () => {

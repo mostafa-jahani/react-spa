@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
-import http from "../../services/httpService";
 import {updatePost} from "../../controller/postController";
 
 const EditForm = ({post}) => {
