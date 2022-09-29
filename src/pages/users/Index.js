@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import ListUsers from "../../components/users/List";
-import axios from "axios";
+import {getUsers} from "../../controller/userController";
 
 
 const IndexUser = () => {
@@ -10,7 +10,7 @@ const IndexUser = () => {
 
     useEffect(() => {
 
-        axios.get("/users")
+        getUsers()
             .then(users => {
                 setUsers(users.data);
                 setLoading(false)

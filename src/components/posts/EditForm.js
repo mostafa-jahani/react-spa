@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
-import axios from "axios";
+import http from "../../services/httpService";
+import {updatePost} from "../../controller/postController";
 
 const EditForm = ({post}) => {
 
@@ -13,26 +14,17 @@ const EditForm = ({post}) => {
         e.preventDefault();
 
         setLoading(true);
-        axios({
-            method: 'PUT',
-            url: `/posts/${post.id}`,
-            data: {
-                title,
-                body,
-                userId: 1,
-                id: post.id
-            },
-            headers: {'Content-type': 'application/json; charset=UTF-8',}
-        }).then((data) => {
-            setLoading(false)
-            setError(null)
-            Swal.fire({
-                title: "Thanks!",
-                text: "Post update successfully",
-                icon: "success",
-                confirmButtonText: "Ok",
-            });
-        }).catch(err => {
+        updatePost(post.id, {title, body, userId: 1, id: post.id})
+            .then((data) => {
+                setLoading(false)
+                setError(null)
+                Swal.fire({
+                    title: "Thanks!",
+                    text: "Post update successfully",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                });
+            }).catch(err => {
             setLoading(false)
             setError(err.message)
             Swal.fire({

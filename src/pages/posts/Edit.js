@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import EditFormPost from "../../components/posts/EditForm";
-import axios from "axios";
+import http from "../../services/httpService";
+import {editPost} from "../../controller/postController";
 
 const EditPost = () => {
     const {postId} = useParams();
@@ -12,7 +13,7 @@ const EditPost = () => {
 
     useEffect(() => {
 
-        axios.get(`/posts/${postId}`)
+        editPost(postId)
             .then(post => {
                 setPost(post.data);
                 setLoading(false)
