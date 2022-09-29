@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
 import {deletePost} from "../../controller/postController";
+import {sweetalertDeletePost, sweetalertError} from "../../services/seetalertService";
 
 
 const DeletePost = ({ postId }) => {
@@ -14,21 +14,11 @@ const DeletePost = ({ postId }) => {
             .then((res) => {
                 setLoading(false)
                 setError(null)
-                Swal.fire({
-                    title: "Thanks!",
-                    text: `Post ${postId} delete successfully`,
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                });
+                sweetalertDeletePost(postId)
             }).catch(err => {
                 setLoading(false)
                 setError(err.message)
-                Swal.fire({
-                    title: "Error!",
-                    text: err.message,
-                    icon: "warning",
-                    confirmButtonText: "Ok",
-                });
+                sweetalertError(err)
             });
     }
 

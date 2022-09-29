@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
-import Swal from "sweetalert2";
 import {updatePost} from "../../controller/postController";
+import {sweetalertError, sweetalertUpdatePost} from "../../services/seetalertService";
+
 
 const EditForm = ({post}) => {
 
@@ -17,21 +18,11 @@ const EditForm = ({post}) => {
             .then((data) => {
                 setLoading(false)
                 setError(null)
-                Swal.fire({
-                    title: "Thanks!",
-                    text: "Post update successfully",
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                });
+                sweetalertUpdatePost()
             }).catch(err => {
             setLoading(false)
             setError(err.message)
-            Swal.fire({
-                title: "Error!",
-                text: err.message,
-                icon: "warning",
-                confirmButtonText: "Ok",
-            });
+            sweetalertError(err)
         });
     }
 
