@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import http from '../../services/httpService'
+import {deletePost} from "../../controller/postController";
 
 
 const DeletePost = ({ postId }) => {
@@ -10,7 +11,7 @@ const DeletePost = ({ postId }) => {
 
     const handleDelete = () => {
         setLoading(true);
-        http.delete(`/posts/${postId}`)
+        deletePost(postId)
             .then((res) => {
                 setLoading(false)
                 setError(null)
